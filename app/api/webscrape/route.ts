@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-interface SearchResult {
-  title: string;
-  url: string;
-}
+
 
 export async function GET(req: Request) {
   const url = new URL(req.url);

@@ -1,8 +1,5 @@
 
-
-import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import { UserOrganizationInvitationResource } from "@clerk/types"; // Import the correct type
 
 export const useFetchResources = () => {
     const [loading, setLoading] = useState(false);

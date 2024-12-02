@@ -1,7 +1,5 @@
 "use client";
 
-import { OrganizationSwitcher, useOrganization, useUser } from "@clerk/nextjs";
-import { OrganizationList } from "../_components/admin/org-list";
 import { useFetchInvites } from "@/hooks/useFetchInvites";
 import { OrgCard } from "./_components/org_card";
 import { LoaderPinwheel } from "lucide-react";

@@ -2,19 +2,32 @@ import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 
 // Helper function to format date as "3rd December 2024"
-const formatDate = (date: string) => {
+const formatDate = (date: Date) => {
   const d = new Date(date);
   const day = d.getDate();
-  const month = d.toLocaleString('default', { month: 'long' });
+  const month = d.toLocaleString("default", { month: "long" });
   const year = d.getFullYear();
-  const suffix = ['st', 'nd', 'rd'][((day + 90) % 100 - 10) % 10 - 1] || 'th'; // Handles suffixes like 'st', 'nd'
+  const suffix = ["st", "nd", "rd"][(day % 10) - 1] || "th"; // Handles suffixes like 'st', 'nd'
   return `${day}${suffix} ${month} ${year}`;
 };
 
-export const DownloadEventsExcel = ({ events }: { events: any[] }) => {
+interface Job {
+  id: string; // Unique identifier
+  company: string;
+  Process: string;
+  Mode: string;
+  Branches: string;
+  Profile: string;
+  date: Date; // Ensure this is a Date object
+  Timings: string;
+  SPOC: string;
+  For: string;
+}
+
+export const DownloadEventsExcel = ({ events }: { events: Job[] }) => {
   const handleDownloadExcel = () => {
     // Prepare data for the Excel sheet
-    const formattedEvents = events.map((event, index) => ({
+    const formattedEvents = events.map((event) => ({
       "Company": event.company,
       "Process": event.Process,
       "Mode": event.Mode,

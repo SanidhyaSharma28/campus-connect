@@ -17,8 +17,6 @@ import useFetchDatedJobs from "@/hooks/useFetchDatedJobs";
 
 
 
-
-// CalendarWithDialog Component
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function CalendarWithDialog({
@@ -79,8 +77,8 @@ function CalendarWithDialog({
           ...classNames,
         }}
         components={{
-          IconLeft: ({ ...props }) => <ChevronLeft className="h-5 w-5" />, // Increased icon size
-          IconRight: ({ ...props }) => <ChevronRight className="h-5 w-5" />, // Increased icon size
+          IconLeft: ({ }) => <ChevronLeft className="h-5 w-5" />, // Increased icon size
+          IconRight: ({  }) => <ChevronRight className="h-5 w-5" />, // Increased icon size
         }}
         onDayClick={handleDateClick} // Handle date clicks
         {...props}

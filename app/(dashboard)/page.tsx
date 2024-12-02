@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Calendar } from "@/components/ui/calendar";
+
 import { Button } from "@/components/ui/button";
 import CompanyForm from "./_components/admin/company-form";
 import { DialogDescription } from "@radix-ui/react-dialog";
@@ -17,7 +17,7 @@ import { CalendarWithDialog } from "./_components/CalendarWithDialog";
 import toast from "react-hot-toast";
 
 const DashboardPage: React.FC = () => {
-  const { user, isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
 
   const handleFormSubmit = async (formData: {
     date: string;
@@ -41,6 +41,8 @@ const DashboardPage: React.FC = () => {
       }
 
       const data = await response.json();
+      console.log(data);
+      
       toast.success("Event created successfully. Refresh to view ");
       // Handle success as needed
     } catch (error) {

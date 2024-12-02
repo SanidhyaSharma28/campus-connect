@@ -4,7 +4,6 @@ import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 import {
     DropdownMenu,
     DropdownMenuTrigger,
-    DropdownMenuSeparator,
     DropdownMenuContent,
     DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
@@ -29,7 +28,7 @@ const onDelete = async (id: number) => {
             throw new Error("Failed to delete event");
         }
         toast.success("Event deleted refresh to update")
-        const result = await response.json();
+        
         
 
     } catch (error) {

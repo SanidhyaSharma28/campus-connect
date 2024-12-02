@@ -57,8 +57,8 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => <ChevronLeft className="h-5 w-5" />, // Increased icon size
-        IconRight: ({ ...props }) => <ChevronRight className="h-5 w-5" />, // Increased icon size
+        IconLeft: ({ }) => <ChevronLeft className="h-5 w-5" />, // Increased icon size
+        IconRight: ({  }) => <ChevronRight className="h-5 w-5" />, // Increased icon size
       }}
       onDayClick={onDateClick} // Use the onDateClick prop here
       {...props}
