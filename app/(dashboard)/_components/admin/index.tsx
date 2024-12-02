@@ -21,6 +21,8 @@ export const Admin = () => {
     const { organization } = useOrganization();
     const [invitations, setInvitations] = useState<OrganizationInvitationResource[]>([]);
     const [loading, setLoading] = useState(true);
+    console.log(loading);
+    
 
     useEffect(() => {
         const fetchInvitations = async () => {

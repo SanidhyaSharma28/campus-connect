@@ -91,6 +91,8 @@ const InvitedForm = ({ params }: { params: { slug: string } }) => {
             }
 
             const result = await response.json();
+            console.log(result);
+            
             toast.success("Successfully created resources.");
 
             // Redirect to /resources
