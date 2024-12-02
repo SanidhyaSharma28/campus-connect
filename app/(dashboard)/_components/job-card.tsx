@@ -4,7 +4,7 @@ import { EllipsisVertical } from "lucide-react";
 import { Actions } from "./actions";
 
 interface JobCardProps {
-    id:number;
+    id: number;
     isAdmin: boolean;
     company: string;
     process: string;
@@ -13,6 +13,7 @@ interface JobCardProps {
     date: Date; // This should be a valid Date object
     time: string;
     spoc: string;
+    type: string; // 'internship', 'placement', or 'both'
 }
 
 export const JobCard = ({
@@ -22,48 +23,82 @@ export const JobCard = ({
     process,
     profile,
     date,
+    type,
     time,
     spoc,
 }: JobCardProps) => {
     const { isAdmin: AdminOptions } = useAuth();
-    
+
     // Format the date
-    const formattedDate = new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
     }).format(date);
 
-    
+    // Determine the background colors
+    const backgroundColor = type === "both"
+        ? "#B4D88C" // Lighter Green
+        : type === "internship"
+        ? "#88C4D8" // Lighter Blue
+        : "#D88C8C"; // Lighter Red;
+
+    const backgroundAvatarColor = type === "both"
+        ? "#38761D" // Green
+        : type === "internship"
+        ? "#3D85C6" // Blue
+        : "#CC4224"; // Red;
 
     return (
-        <div className="relative w-full rounded-md border-2 border-black flex my-4 bg-blue-300 p-2">
+        <div
+            className="relative w-full rounded-md border border-gray-300 flex my-3 p-2"
+            style={{ backgroundColor: backgroundAvatarColor }}
+        >
             {AdminOptions && (
-                <div className="absolute top-2 right-2 z-10">
+                <div className="absolute top-1 right-1">
                     <Actions id={id} side="left" sideOffset={0}>
                         <button>
-                            <EllipsisVertical className="text-black" />
+                            <EllipsisVertical className="text-gray-600 hover:text-gray-800" />
                         </button>
                     </Actions>
                 </div>
             )}
-            <div className="flex flex-col items-center w-32 bg-blue-600">
-                <Avatar className="w-20 h-20 text-xl">
-                    <AvatarFallback>
-                        {company[0]}
-                    </AvatarFallback>
+
+            {/* Company Avatar Section */}
+            <div
+                className="flex flex-col items-center justify-center w-24 py-1 rounded-lg border border-gray-400"
+                style={{ backgroundColor }}
+            >
+                <Avatar className="w-16 h-16">
+                    <AvatarFallback>{company[0]}</AvatarFallback>
                 </Avatar>
-                <p className="bg-red-500 text-center w-full mt-2 text-sm">{company}</p>
+                <p className="mt-1 text-sm font-medium text-gray-800">{company}</p>
             </div>
-            <div className="flex flex-col ml-4">
-                <p>Process: {process}</p>
-                <p>Mode: {mode}</p>
-                <p>Profile: {profile}</p>
-                <p>Date: {formattedDate}</p>
+
+            {/* Job Details Section */}
+            <div className="flex flex-col px-3">
+                <p className="text-sm">
+                    <span className="font-medium">Process:</span> {process}
+                </p>
+                <p className="text-sm">
+                    <span className="font-medium">Mode:</span> {mode}
+                </p>
+                <p className="text-sm">
+                    <span className="font-medium">Profile:</span> {profile}
+                </p>
+                <p className="text-sm">
+                    <span className="font-medium">Date:</span> {formattedDate}
+                </p>
             </div>
-            <div className="flex flex-col ml-4">
-                <p>Time: {time}</p>
-                <p>SPOC: {spoc}</p>
+
+            {/* Additional Details Section */}
+            <div className="flex flex-col px-3">
+                <p className="text-sm">
+                    <span className="font-medium">Time:</span> {time}
+                </p>
+                <p className="text-sm">
+                    <span className="font-medium">SPOC:</span> {spoc}
+                </p>
             </div>
         </div>
     );

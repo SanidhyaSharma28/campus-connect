@@ -21,13 +21,31 @@ model Event {
   Process   String
   Timings   String
   Mode      String
+  For       String
   Branches  String
-  Cutoff    Float
+  Cutoff    String
   Profile   String
   createdAt DateTime @default(now())
 }
+
 model Resource {
-  id        Int      @id @default(autoincrement())
-  createdBy String
-  company   String
+  id          Int      @id @default(autoincrement())
+  CollegeId   String
+  Name        String
+  Company     String
+  Phone       String
+  Email       String
+  LinkedIn    String
+  Branch      String
+  Experience  String
+  Focus       String  
+  rounds      Round[]  
+}
+
+model Round {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  resourceId  Int      
+  resource    Resource  @relation(fields: [resourceId], references: [id]) 
 }

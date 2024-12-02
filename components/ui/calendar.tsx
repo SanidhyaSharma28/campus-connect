@@ -1,18 +1,21 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { DayPicker } from "react-day-picker"
+import * as React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { DayPicker } from "react-day-picker";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
+export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
+  onDateClick?: (date: Date) => void; // New prop to handle date clicks
+};
 
 function Calendar({
   className,
   classNames,
   showOutsideDays = false,
+  onDateClick, // Destructure the new prop
   ...props
 }: CalendarProps) {
   return (
@@ -34,7 +37,7 @@ function Calendar({
         table: "w-full border-collapse space-y-1",
         head_row: "flex justify-between",
         head_cell:
-          " text-muted-foreground rounded-md w-12 font-normal text-[1.25rem] text-center", // Ensure center alignment for header
+          "text-muted-foreground rounded-md w-12 font-normal text-[1.25rem] text-center", // Ensure center alignment for header
         row: "flex w-full mt-2",
         cell: "border-2 border-grey-200 rounded-md mx-0.5 h-20 w-20 text-center text-base p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20", // Increased cell height and width
         day: cn(
@@ -57,10 +60,11 @@ function Calendar({
         IconLeft: ({ ...props }) => <ChevronLeft className="h-5 w-5" />, // Increased icon size
         IconRight: ({ ...props }) => <ChevronRight className="h-5 w-5" />, // Increased icon size
       }}
+      onDayClick={onDateClick} // Use the onDateClick prop here
       {...props}
     />
-  )
+  );
 }
-Calendar.displayName = "Calendar"
+Calendar.displayName = "Calendar";
 
-export { Calendar }
+export { Calendar };

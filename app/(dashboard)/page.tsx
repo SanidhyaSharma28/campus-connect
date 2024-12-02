@@ -8,13 +8,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import CompanyForm from "./_components/admin/company-form";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { Jobs } from "./_components/jobs";
-
+import { CalendarWithDialog } from "./_components/CalendarWithDialog";
+import toast from "react-hot-toast";
 
 const DashboardPage: React.FC = () => {
   const { user, isAdmin } = useAuth();
@@ -27,7 +27,7 @@ const DashboardPage: React.FC = () => {
     Timings: string;
     Mode: string;
     Branches: string;
-    Cutoff: number;
+    Cutoff: string;
     Profile: string;
   }) => {
     try {
@@ -41,7 +41,7 @@ const DashboardPage: React.FC = () => {
       }
 
       const data = await response.json();
-      
+      toast.success("Event created successfully. Refresh to view ");
       // Handle success as needed
     } catch (error) {
       console.error("Error creating event:", error);
@@ -50,9 +50,10 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className="h-[calc(100%-42px)] p-6 flex justify-between">
+      {/* Left Section */}
       <div className="flex-1 items-center">
         <div className="flex justify-center">
-          <Calendar className="" />
+          <CalendarWithDialog />
         </div>
         <div className="flex justify-center">
           {isAdmin && (
@@ -73,8 +74,13 @@ const DashboardPage: React.FC = () => {
           )}
         </div>
       </div>
-      <div className=" flex-1">
-        <Jobs/>
+
+      {/* Vertical Line Separator */}
+      <div className="w-[2px] bg-gray-300 mx-4"></div>
+
+      {/* Right Section */}
+      <div className="flex-1">
+        <Jobs />
       </div>
     </div>
   );

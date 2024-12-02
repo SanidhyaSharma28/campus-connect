@@ -35,7 +35,7 @@ export const Admin = () => {
                         
                         
                     }
-                    // console.log("runnning out");
+                    
                 }
             } catch (err) {
                 console.error("Failed to fetch invitations:", err);
@@ -66,22 +66,26 @@ export const Admin = () => {
                 </div>
                 <OrganizationList />
             </div>
-            <div className="rounded-lg border-2 max-h-[480px] border-blue-500 flex-1">
+            <div className="rounded-lg border-2  border-blue-500 flex-1">
                 <div className="text-center text-2xl">
                     {organization?.name}
                 </div>
-
+                <div className="items-center justify-center flex">
                 <InviteButton />
+                </div>
+                <div className="flex mt-4">
+
                 {invitations.map((invite) => (
                     <InviteCard 
-                        key={invite.id} 
-                        createdAt={invite.createdAt} 
-                        emailId={invite.emailAddress} 
-                        role={invite.role} 
-                        status={invite.status} 
-                        updatedAt={invite.updatedAt} 
+                    key={invite.id} 
+                    createdAt={invite.createdAt} 
+                    emailId={invite.emailAddress} 
+                    role={invite.role} 
+                    status={invite.status} 
+                    updatedAt={invite.updatedAt} 
                     />
                 ))}
+                </div>
             </div>
         </div>
     );

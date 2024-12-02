@@ -6,41 +6,42 @@ import { NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 export async function GET(req: Request) {
   try {
-    const { filter } = await req.json().catch(() => ({})); // Safely handle potential errors in JSON parsing
+    // Get the URL and extract the search parameters
+    const url = new URL(req.url);
+    const date = url.searchParams.get("date");
 
-    const queryConditions: any = {};
+    // Fetch all events
+    let events = await prisma.event.findMany();
 
-    if (filter) {
-      const { date, branches } = filter;
-
-      if (date) {
-        queryConditions.date = date; // Adjust based on your database schema
-      }
-      if (branches) {
-        queryConditions.branches = { in: branches }; // Use your actual field name
-      }
+    // Filter events by date if a date is provided
+    if (date) {
+      const targetDate = new Date(date);
+      events = events.filter((event) => {
+        const eventDate = new Date(event.date);
+        return (
+          eventDate.toISOString().split("T")[0] === targetDate.toISOString().split("T")[0]
+        );
+      });
     }
-
-    const events = await prisma.event.findMany({
-      where: queryConditions,
-    });
 
     return NextResponse.json(events, { status: 200 });
   } catch (error) {
-    console.error("Error getting jobs", error);
-    return NextResponse.json({ error: "Failed to get jobs" }, { status: 500 });
+    console.error("Error getting events", error);
+    return NextResponse.json({ error: "Failed to get events" }, { status: 500 });
   }
 }
 
+
 export async function POST(req: Request) {
   try {
-    const { date, company, SPOC, Process, Timings, Mode, Branches, Cutoff, Profile } = await req.json();
+    const { date, company, SPOC, Process, Timings, Mode, Branches, Cutoff, Profile,For } = await req.json();
 
     const event = await prisma.event.create({
       data: {
         date: new Date(date), // Ensure the date is in Date format
         company,
         SPOC,
+        For,
         Process,
         Timings,
         Mode,

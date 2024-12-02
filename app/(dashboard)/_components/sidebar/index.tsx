@@ -11,7 +11,7 @@ export const Sidebar = () => {
     const data = ExtractDetails(user?.emailAddresses[0].emailAddress || "");
 
     return (
-        <div className="fixed z-[1] left-0 h-full w-[140px] flex p-1 pt-5 flex-col gap-y-4 text-muted-foreground border-r border-black">
+        <div className="fixed z-[1] left-0 h-full w-[140px] flex p-1 pt-5 flex-col gap-y-4 text-white border-r border-black" style={{backgroundColor:"#002C54"}}>
             <h1 className="absolute top-0 left-0 w-full text-center">
                 {isAdmin ? "Admin" : "Student"}
             </h1>
@@ -39,9 +39,11 @@ export const Sidebar = () => {
                 <Link href="/resources">
                     <Button className="text-center w-full " size="lg" variant="ghost">Resources</Button>
                 </Link>
+                {isAdmin &&
                 <Link href="/admin">
                     <Button className="text-center w-full " size="lg" variant="ghost">Admin</Button>
                 </Link>
+                }
             </div>
         </div>
     );

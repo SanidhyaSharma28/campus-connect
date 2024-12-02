@@ -1,29 +1,40 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { OngoingJobs } from "./ongoing-jobs"
-import { PastJobs } from "./past-jobs"
-import { FutureJobs } from "./future-jobs"
+
 
 
 
 export const Jobs = () => {
 
     return (
-        <Tabs defaultValue="Ongoing" style={{maxHeight:"600px"}} className="  w-full">
-            <TabsList>
-                <TabsTrigger value="Ongoing">Ongoing</TabsTrigger>
-                <TabsTrigger value="Past">Past</TabsTrigger>
-                <TabsTrigger value="Upcoming">Upcoming</TabsTrigger>
-            </TabsList>
-            <TabsContent value="Ongoing">
-                <OngoingJobs/>
-            </TabsContent>
-            <TabsContent value="Past">
-                <PastJobs/>
-            </TabsContent>
-            <TabsContent className="h-full" value="Upcoming">
-                <FutureJobs/>
-            </TabsContent>
-        </Tabs>
+        <div className="">
+            <h1 className=" text-center text-2xl">Upcoming Jobs</h1>
+            <div className="bg-gray-300 p-2 rounded-sm flex justify-between mb-4 px-4">
+                <div className="flex items-center">
+                    <div
+                        className="w-6 h-6 rounded-full"
+                        style={{ backgroundColor: "#3D85C6" }}
+                    ></div>
+                    <p className="ml-2 text-sm">Internship</p>
+                </div>
+                <div className="flex items-center">
+                    <div
+                        className="w-6 h-6 rounded-full"
+                        style={{ backgroundColor: "#CC4224" }}
+                    ></div>
+                    <p className="ml-2 text-sm">Placement</p>
+                </div>
+                <div className="flex items-center">
+                    <div
+                        className="w-6 h-6 rounded-full"
+                        style={{ backgroundColor: "#38761D" }}
+                    ></div>
+                    <p className="ml-2 text-sm">Internship & Placement</p>
+                </div>
+            </div>
+            <OngoingJobs />
+        </div>
+
 
     )
 }

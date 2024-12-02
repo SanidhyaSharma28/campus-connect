@@ -8,6 +8,7 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import toast from "react-hot-toast";
 
 interface ActionsProps {
     id: number;
@@ -24,12 +25,12 @@ const onDelete = async (id: number) => {
         });
 
         if (!response.ok) {
+            toast.error("Failed to delete refresh to update")
             throw new Error("Failed to delete event");
         }
-
+        toast.success("Event deleted refresh to update")
         const result = await response.json();
-        console.log(result.message); // Log success message or handle it as needed
-        // Optionally, you might want to trigger a re-fetch of data or update state here
+        
 
     } catch (error) {
         console.error("Error deleting event:", error);
@@ -44,14 +45,9 @@ export const Actions = ({ id, children, side, sideOffset }: ActionsProps) => {
                 {children}
             </DropdownMenuTrigger>
             <DropdownMenuContent side={side} sideOffset={sideOffset} className="w-60" onClick={(e) => e.stopPropagation()}>
-                <DropdownMenuItem className="cursor-pointer p-3" onClick={() => { /* Handle copy link here */ }}>
-                    Copy board link
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer p-3" onClick={() => onDelete(id)}>
-                    Delete {id}
+                    Delete
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
             </DropdownMenuContent>
         </DropdownMenu>
     );

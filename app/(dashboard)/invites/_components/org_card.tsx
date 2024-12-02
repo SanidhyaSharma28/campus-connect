@@ -18,7 +18,7 @@ export const OrgCard = ({ slug, status, role, accept }: OrgCardProps) => {
     };
 
     return (
-        <div className="border-2 border-gray-300 rounded-md p-4 shadow-md flex justify-between items-center mb-4 mx-5">
+        <div className="border-2 border-gray-300 rounded-md p-4 shadow-md flex justify-between items-center mb-4 mx-5 bg-white">
             <div className="flex-1 text-lg font-semibold text-gray-800">
                 <div>{slug}</div>
                 <div className="text-sm text-gray-600">{role}</div>
