@@ -41,6 +41,8 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onSubmit }) => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("1:",formData);
+    
     await onSubmit(formData);
     setFormData({
       date: "",
@@ -206,8 +208,6 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onSubmit }) => {
               <label htmlFor="both" className="text-gray-300">Both</label>
             </div>
           </div>
-        </form>
-
         {/* Submit Button */}
         <Button
           type="submit"
@@ -215,9 +215,14 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onSubmit }) => {
         >
           Submit
         </Button>
+        </form>
+
       </div>
     </div>
   );
 };
 
 export default CompanyForm;
+
+
+
